@@ -1,6 +1,7 @@
 package com.example.exchangerate.data.remote
 
-import com.example.exchangerate.domain.ListOfCurrenciesRepo
+import com.example.exchangerate.data.remote.entities.Valute
+import com.example.exchangerate.domain.repo.ListOfCurrenciesRepo
 import com.example.exchangerate.domain.entities.ExchangeRate
 import com.example.exchangerate.mapping.DataMapper
 import javax.inject.Inject
@@ -12,7 +13,7 @@ class ListOfCurrenciesImpl @Inject constructor(
 
     override suspend fun getCurrencies(): List<ExchangeRate> =
         rateController.getRateAsync().valute.map { valute ->
-            mapper.mapToGetValute(
+            mapper.mapValuteToExchangeRate(
                 Valute(
                     id = valute.value.id,
                     charCode = valute.value.charCode,

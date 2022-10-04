@@ -4,6 +4,7 @@
     <string name="retrofit_url">https://www.cbr-xml-daily.ru/</string>
     <string name="header_list_valute">Вывод списка валют</string>
     <string name="header_list_favorite_valute">Вывод списка избранных валют</string>
+    <string name="header_exception_handler">CoroutineExceptionHandler</string>
 
     <!--    DropdownMenu-->
     <string name="alphabet_ascending">Алфавит по возрастанию</string>

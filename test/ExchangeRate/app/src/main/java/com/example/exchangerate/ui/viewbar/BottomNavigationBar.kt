@@ -3,12 +3,12 @@ package com.example.exchangerate.ui.viewbar
 import androidx.compose.foundation.border
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -36,11 +36,11 @@ fun BottomNavigationBar(navController: NavController) {
                         width = dimensionResource(R.dimen.one_dp),
                         color = MaterialTheme.colors.background
                     ),
-                icon = {},
+                icon = { Icon(item.icon, null) },
                 label = {
                     Text(
                         text = item.title,
-                        fontSize = 15.sp
+                        fontSize = 13.sp
                     )
                 },
                 alwaysShowLabel = true,

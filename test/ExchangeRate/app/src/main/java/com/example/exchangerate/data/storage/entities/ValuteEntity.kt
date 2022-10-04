@@ -21,7 +21,7 @@ data class ValuteEntity(
     val name: String? = "",
 
     @ColumnInfo(name = "Value")
-    val value: Double = 0.0,
+    val value: String = "",
 
     @ColumnInfo(name = "Previous")
     val previous: Double = 0.0

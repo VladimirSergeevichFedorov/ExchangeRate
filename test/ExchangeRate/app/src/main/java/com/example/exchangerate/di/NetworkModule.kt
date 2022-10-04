@@ -3,9 +3,9 @@ package com.example.exchangerate.di
 import android.content.Context
 import com.example.exchangerate.BuildConfig
 import com.example.exchangerate.R
-import com.example.exchangerate.data.remote.ListOfCurrenciesImpl
 import com.example.exchangerate.data.remote.RateController
-import com.example.exchangerate.domain.ListOfCurrenciesUseCase
+import com.example.exchangerate.domain.repo.ListOfCurrenciesRepo
+import com.example.exchangerate.domain.usecase.ListOfCurrenciesUseCase
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -24,8 +24,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
+    @Singleton
     @Provides
-    fun provideUseCase(impl: ListOfCurrenciesImpl) = ListOfCurrenciesUseCase(impl)
+    fun provideRemoteRepositoryUseCase(impl: ListOfCurrenciesRepo) = ListOfCurrenciesUseCase(impl)
 
     @Singleton
     @Provides

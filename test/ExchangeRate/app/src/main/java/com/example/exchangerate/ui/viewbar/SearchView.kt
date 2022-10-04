@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
@@ -35,7 +36,8 @@ fun SearchView(state: MutableState<TextFieldValue>) {
                 contentDescription = null,
                 modifier = Modifier
                     .padding(dimensionResource(R.dimen.fifteen_dp))
-                    .size(dimensionResource(R.dimen.twenty_four_dp))
+                    .size(dimensionResource(R.dimen.twenty_four_dp)),
+                tint = MaterialTheme.colors.background
             )
         },
         trailingIcon = {
@@ -50,7 +52,8 @@ fun SearchView(state: MutableState<TextFieldValue>) {
                         contentDescription = null,
                         modifier = Modifier
                             .padding(dimensionResource(R.dimen.fifteen_dp))
-                            .size(dimensionResource(R.dimen.twenty_four_dp))
+                            .size(dimensionResource(R.dimen.twenty_four_dp)),
+                        tint = MaterialTheme.colors.background
                     )
                 }
             }

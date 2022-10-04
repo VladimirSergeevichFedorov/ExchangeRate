@@ -1,6 +1,11 @@
 package com.example.exchangerate.navigation
 
-sealed class Navigation(var route: String, var title: String) {
-    object Popular : Navigation("popular",  "Популярное")
-    object Favorites : Navigation("favorites",  "Избранное")
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.TableRows
+import androidx.compose.ui.graphics.vector.ImageVector
+
+sealed class Navigation(val route: String, val icon: ImageVector, val title: String) {
+    object Popular : Navigation("popular",  icon = Icons.Filled.TableRows,"Популярное")
+    object Favorites : Navigation("favorites", icon = Icons.Filled.Favorite,  "Избранное")
 }

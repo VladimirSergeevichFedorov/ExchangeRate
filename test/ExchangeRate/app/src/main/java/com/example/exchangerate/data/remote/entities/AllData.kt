@@ -1,4 +1,4 @@
-package com.example.exchangerate.data.remote
+package com.example.exchangerate.data.remote.entities
 
 import com.google.gson.annotations.SerializedName
 

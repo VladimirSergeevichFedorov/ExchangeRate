@@ -21,21 +21,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.navigation.NavController
-import com.example.exchangerate.ui.viewmodels.PopularViewModule
+import com.example.exchangerate.ui.viewmodels.PopularViewModel
 import com.example.exchangerate.R
-import com.example.exchangerate.navigation.Navigation
 import com.example.exchangerate.utils.StateSorted
+import com.example.exchangerate.utils.filterResult
 import com.example.exchangerate.utils.flow
+import com.example.exchangerate.utils.search
 
 @Composable
 fun PopularScreen(
-    viewModel: PopularViewModule,
-    navController: NavController,
+    popularViewModel: PopularViewModel,
     stateSearchText: MutableState<TextFieldValue>,
     stateSorted: MutableState<StateSorted>
 ) {
-    val valuates by viewModel::valuatesFlow.flow.collectAsState()
+    val valuates by popularViewModel::valuatesFlow.flow.collectAsState()
 
     Column(
         modifier = Modifier
@@ -50,29 +49,15 @@ fun PopularScreen(
 
         val searchText = stateSearchText.value.text
 
-        val valuatesList =
-            if (searchText.isNotEmpty()) valuates.filter { it.valute.contains(searchText.uppercase()) } else valuates
-
-        val filterResult = when (stateSorted.value) {
-            StateSorted.ALPHABETASCENDING -> valuatesList.sortedBy { it.valute }
-            StateSorted.ALPHABETDESCENDING -> valuatesList.sortedBy { it.valute }
-                .reversed()
-            StateSorted.VALUEASCENDING -> valuatesList.sortedBy { it.value }
-            StateSorted.VALUEDESCENDING -> valuatesList.sortedBy { it.value }
-                .reversed()
-            else -> {
-                valuatesList
-            }
-        }
         Text(text = stringResource(id = R.string.header_list_valute))
         LazyColumn(
             modifier = Modifier
                 .padding()
                 .fillMaxWidth()
         ) {
-            if (filterResult.isNotEmpty()) {
+            if (valuates.isNotEmpty()) {
                 item {
-                    filterResult.forEach { valute ->
+                    valuates.filterResult(searchText, stateSorted, ::search).forEach { valute ->
                         Row(
                             modifier = Modifier
                                 .padding(
@@ -93,7 +78,7 @@ fun PopularScreen(
                                     .wrapContentSize(
                                         Alignment.CenterEnd
                                     ),
-                                onClick = { navController.navigate(Navigation.Favorites.route) }
+                                onClick = { popularViewModel.saveValuteForbd(valute) }
                             ) { Icon(Icons.Filled.StarBorder, null) }
                         }
                     }
