@@ -6,7 +6,6 @@ import com.example.exchangerate.domain.entities.ExchangeRate
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
@@ -30,13 +29,14 @@ inline fun <T> Iterable<T>.filterResult(
 }
 
 inline fun CoroutineScope.safeLaunch(
-    dispatcher: CoroutineDispatcher = Dispatchers.Default,
+    dispatcher: CoroutineDispatcher? = null,
     crossinline launchBody: suspend () -> Unit
 ): Job {
     val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
         Log.e("Exception", "CoroutineExceptionHandler got $exception")
     }
-    val coroutineContext = dispatcher + coroutineExceptionHandler
+
+    val coroutineContext = if (dispatcher == null) this.coroutineContext + coroutineExceptionHandler else dispatcher + coroutineExceptionHandler
 
     return this.launch(coroutineContext) {
         launchBody.invoke()

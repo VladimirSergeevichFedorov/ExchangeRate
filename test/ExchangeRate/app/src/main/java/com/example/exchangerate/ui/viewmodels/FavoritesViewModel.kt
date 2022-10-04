@@ -19,7 +19,7 @@ class FavoritesViewModel @Inject constructor(
         private set
 
     init {
-        viewModelScope.safeLaunch(dispatcher = Dispatchers.Main.immediate) {
+        viewModelScope.safeLaunch {
             localBDUseCase.getFavoritesValute().collect{
                 favoritesValuatesFlow = it
             }

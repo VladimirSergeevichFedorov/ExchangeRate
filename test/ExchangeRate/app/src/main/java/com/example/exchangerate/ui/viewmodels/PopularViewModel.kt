@@ -21,7 +21,7 @@ class PopularViewModel @Inject constructor(
         private set
 
     init {
-        viewModelScope.safeLaunch(dispatcher = Dispatchers.Main.immediate) {
+        viewModelScope.safeLaunch {
             valuatesFlow =  listOfCurrenciesUseCase.getCurrencies()
         }
     }
