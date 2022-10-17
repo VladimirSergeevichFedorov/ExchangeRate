@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.exchangerate.R
 import com.example.exchangerate.ui.viewmodels.FavoritesViewModel
 import com.example.exchangerate.utils.StateSorted
@@ -30,13 +31,11 @@ import com.example.exchangerate.utils.search
 
 @Composable
 fun FavoritesScreen(
-    favoritesViewModel: FavoritesViewModel,
     stateSearchText: MutableState<TextFieldValue>,
     stateSorted: MutableState<StateSorted>
 ) {
-
+    val favoritesViewModel = hiltViewModel<FavoritesViewModel>()
     val valuates by favoritesViewModel::favoritesValuatesFlow.flow.collectAsState()
-
 
     Column(
         modifier = Modifier

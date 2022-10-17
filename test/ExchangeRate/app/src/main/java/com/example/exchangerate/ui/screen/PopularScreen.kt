@@ -1,5 +1,6 @@
 package com.example.exchangerate.ui.screen
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,8 +8,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.StarBorder
@@ -21,8 +24,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
-import com.example.exchangerate.ui.viewmodels.PopularViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.exchangerate.R
+import com.example.exchangerate.ui.viewmodels.PopularViewModel
 import com.example.exchangerate.utils.StateSorted
 import com.example.exchangerate.utils.filterResult
 import com.example.exchangerate.utils.flow
@@ -30,10 +34,10 @@ import com.example.exchangerate.utils.search
 
 @Composable
 fun PopularScreen(
-    popularViewModel: PopularViewModel,
     stateSearchText: MutableState<TextFieldValue>,
     stateSorted: MutableState<StateSorted>
 ) {
+    val popularViewModel = hiltViewModel<PopularViewModel>()
     val valuates by popularViewModel::valuatesFlow.flow.collectAsState()
 
     Column(
@@ -46,8 +50,19 @@ fun PopularScreen(
             )
             .fillMaxSize()
     ) {
-
         val searchText = stateSearchText.value.text
+
+        if (valuates.isEmpty()) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                CircularProgressIndicator(
+                    color = MaterialTheme.colors.secondary
+                )
+            }
+        }
 
         Text(text = stringResource(id = R.string.header_list_valute))
         LazyColumn(
@@ -55,6 +70,7 @@ fun PopularScreen(
                 .padding()
                 .fillMaxWidth()
         ) {
+
             if (valuates.isNotEmpty()) {
                 item {
                     valuates.filterResult(searchText, stateSorted, ::search).forEach { valute ->

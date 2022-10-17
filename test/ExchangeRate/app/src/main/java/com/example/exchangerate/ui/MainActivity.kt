@@ -7,9 +7,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
-import com.example.exchangerate.ui.viewmodels.PopularViewModel
 import com.example.exchangerate.navigation.NavigationGraph
 import com.example.exchangerate.ui.theme.ExchangeRateTheme
 import com.example.exchangerate.ui.viewbar.BottomNavigationBar
@@ -26,8 +24,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             ExchangeRateTheme {
                 val navController = rememberNavController()
-                val popularViewModel = hiltViewModel<PopularViewModel>()
-
                 val stateSearchText = remember { mutableStateOf(TextFieldValue("")) }
                 val stateSorted = remember { mutableStateOf(StateSorted.NONE) }
                 Scaffold(
@@ -41,8 +37,6 @@ class MainActivity : ComponentActivity() {
                     content = {
                         NavigationGraph(
                             navController = navController,
-                            popularViewModule = popularViewModel,
-//                            favoritesViewModel = favoritesViewModel,
                             stateSearchText = stateSearchText,
                             stateSorted = stateSorted
                         )
