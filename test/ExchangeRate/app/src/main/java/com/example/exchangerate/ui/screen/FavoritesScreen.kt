@@ -29,6 +29,8 @@ import com.example.exchangerate.utils.filterResult
 import com.example.exchangerate.utils.flow
 import com.example.exchangerate.utils.search
 
+private const val WEIGHT = 1f
+
 @Composable
 fun FavoritesScreen(
     stateSearchText: MutableState<TextFieldValue>,
@@ -75,7 +77,7 @@ fun FavoritesScreen(
                             )
                             IconButton(
                                 modifier = Modifier
-                                    .weight(1f)
+                                    .weight(WEIGHT)
                                     .wrapContentSize(
                                         Alignment.CenterEnd
                                     ),
