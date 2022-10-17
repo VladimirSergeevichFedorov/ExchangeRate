@@ -17,6 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import com.example.exchangerate.utils.StateSorted
 
+private const val WEIGHT = 1f
+
 @Composable
 fun TopBar(
     stateSearchText: MutableState<TextFieldValue>,
@@ -32,7 +34,7 @@ fun TopBar(
                     mDisplayMenu.value = !mDisplayMenu.value
                 },
                 modifier = Modifier
-                    .weight(1f)
+                    .weight(WEIGHT)
                     .wrapContentSize(
                         Alignment.CenterEnd
                     )

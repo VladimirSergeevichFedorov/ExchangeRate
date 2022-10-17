@@ -21,6 +21,9 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.sp
 import com.example.exchangerate.R
 
+private const val EMPTY_STRING = ""
+private const val FONT_SIZE = 18
+
 @Composable
 fun SearchView(state: MutableState<TextFieldValue>) {
     TextField(
@@ -29,7 +32,7 @@ fun SearchView(state: MutableState<TextFieldValue>) {
             state.value = value
         },
         modifier = Modifier,
-        textStyle = TextStyle(fontSize = 18.sp),
+        textStyle = TextStyle(fontSize = FONT_SIZE.sp),
         leadingIcon = {
             Icon(
                 Icons.Default.Search,
@@ -44,7 +47,7 @@ fun SearchView(state: MutableState<TextFieldValue>) {
             if (state.value.text.isNotEmpty()) {
                 IconButton(
                     onClick = {
-                        state.value = TextFieldValue("")
+                        state.value = TextFieldValue(EMPTY_STRING)
                     }
                 ) {
                     Icon(

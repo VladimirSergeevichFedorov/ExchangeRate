@@ -16,6 +16,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.exchangerate.R
 import com.example.exchangerate.navigation.Navigation
 
+private const val FONT_SIZE = 13
+
 @Composable
 fun BottomNavigationBar(navController: NavController) {
     val items = listOf(
@@ -40,7 +42,7 @@ fun BottomNavigationBar(navController: NavController) {
                 label = {
                     Text(
                         text = item.title,
-                        fontSize = 13.sp
+                        fontSize = FONT_SIZE.sp
                     )
                 },
                 alwaysShowLabel = true,
